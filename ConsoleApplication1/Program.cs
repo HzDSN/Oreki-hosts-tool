@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Windows.Forms;
 
 namespace ConsoleApplication1
 {
@@ -14,8 +10,8 @@ namespace ConsoleApplication1
         int count = 0;
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to use Oreki hosts Tool 2.0!");
-            Console.WriteLine("欢迎使用 Oreki hosts Tool 2.0");
+            Console.WriteLine("Welcome to use Oreki hosts Tool 2.1!");
+            Console.WriteLine("欢迎使用 Oreki hosts Tool 2.1");
             Console.WriteLine("If it takes too many times than usual, exit and retry.");
             Console.WriteLine("如果用时比通常更长，请退出后重试");
             Console.WriteLine("STEP 1: Downloading hosts...");
@@ -33,21 +29,23 @@ namespace ConsoleApplication1
                     str.Close();
                     Console.WriteLine("hosts file set successfully!");
                     Console.WriteLine("hosts 文件设置成功！");
-                    MessageBox.Show("hosts file set successfully!\r\nhosts 文件设置成功！", "Oreki hosts Tool", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("hosts file set successfully!\r\nhosts 文件设置成功！", "Oreki hosts Tool", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
 
                 else
                 {
                     Console.WriteLine("Download failed!!!");
-                    Console.WriteLine("下载失败！！！");
+                    Console.WriteLine("下载失败，自动重试中...");
+                    Main(args);
                 }
             }
 
             else
             {
                 Console.WriteLine("Download failed!!!");
-                Console.WriteLine("下载失败！！！");
+                Console.WriteLine("下载失败，自动重试中...");
+                Main(args);
             }
 
 
@@ -58,8 +56,9 @@ namespace ConsoleApplication1
         {
             WebClient MyWebClient = new WebClient();
             MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于对向Internet资源的请求进行身份验证的网络凭据。
-            Byte[] pageData = MyWebClient.DownloadData("https://github.com/racaljk/hosts/raw/master/hosts"); //从指定网站下载数据
+            Byte[] pageData = MyWebClient.DownloadData("https://raw.githubusercontent.com/googlehosts/hosts/master/hosts-files/hosts-compact"); //从指定网站下载数据
             string pageHtml = Encoding.Default.GetString(pageData);  //获取网站页面            
+            /*
             pageHtml += "\r\n\r\n\r\n\r\n#Google Play\r\n";
             pageData = MyWebClient.DownloadData("https://raw.githubusercontent.com/sy618/hosts/master/p"); //从指定网站下载数据
             string temp = Encoding.Default.GetString(pageData);
@@ -71,6 +70,7 @@ namespace ConsoleApplication1
             temp = temp.Substring(28);
             pageHtml += temp;
             pageHtml += "\r\n\r\n\r\n\r\n\r\n";
+            */
             return (pageHtml);
         }
     }
