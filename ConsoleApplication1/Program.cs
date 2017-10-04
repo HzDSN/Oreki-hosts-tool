@@ -56,7 +56,7 @@ namespace ConsoleApplication1
         {
             WebClient MyWebClient = new WebClient();
             MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于对向Internet资源的请求进行身份验证的网络凭据。
-            Byte[] pageData = MyWebClient.DownloadData("https://raw.githubusercontent.com/googlehosts/hosts/master/hosts-files/hosts-compact"); //从指定网站下载数据
+            Byte[] pageData = MyWebClient.DownloadData("https://raw.githubusercontent.com/googlehosts/hosts/master/hosts-files/hosts"); //从指定网站下载数据
             string pageHtml = Encoding.Default.GetString(pageData);  //获取网站页面            
             /*
             pageHtml += "\r\n\r\n\r\n\r\n#Google Play\r\n";
